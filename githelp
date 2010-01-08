@@ -1,0 +1,15 @@
+
+#push changes to github
+git push
+
+#pull randy's updates from github
+git pull origin master
+
+#other useful stuff
+git status
+git diff
+git diff --cached
+git commit -a
+git add
+git rm
+git checkout
