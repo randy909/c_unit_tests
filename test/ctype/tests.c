@@ -1,39 +1,40 @@
 #include <ctype.h>
 #include <stdio.h>
 
-//#define assertTrue(val) \
-	if(##val) \
-		printf("FAIL on line: %d in function: %s() in file: %s\n", __LINE__, __FUNCTION__, __FILE__);
+#define assertTrue(condition)\
+	if (!condition) {\
+		printf("FAILURE: %s(%d) : %s : %s was expected to be true\n", __FILE__, __LINE__, __FUNCTION__, #condition);\
+		return;\
+	}
+
+#define assertFalse(condition)\
+	if (condition) {\
+		printf("FAILURE: %s(%d) : %s : %s was expected to be false\n", __FILE__, __LINE__, __FUNCTION__, #condition);\
+		return;\
+	}
 
 void testIsSpace()
 { 
-//	assertTrue(!issspace('\t'));
-
-
-	if (!isspace('3'))
-		printf("FAIL on line: %d in function: %s() in file: %s\n", __LINE__, __FUNCTION__, __FILE__);
-	if (!isspace('\t'))
-		printf("FAIL on line: %d in function: %s() in file: %s\n", __LINE__, __FUNCTION__, __FILE__);
-	if (!isspace('\n'))
-		printf("FAIL on line: %d in function: %s() in file: %s\n", __LINE__, __FUNCTION__, __FILE__);
-	if (!isspace('\v'))
-		printf("FAIL on line: %d in function: %s() in file: %s\n", __LINE__, __FUNCTION__, __FILE__);
-	if (!isspace('\f'))
-		printf("FAIL on line: %d in function: %s() in file: %s\n", __LINE__, __FUNCTION__, __FILE__);
-	if (!isspace('\r'))
-		printf("FAIL on line: %d in function: %s() in file: %s\n", __LINE__, __FUNCTION__, __FILE__);
+	assertTrue(isspace(' '));
+	assertTrue(isspace('\t'));
+	assertTrue(isspace('\n'));
+	assertTrue(isspace('\v'));
+	assertTrue(isspace('\f'));
+	assertTrue(isspace('\r'));
+	assertTrue(isspace('3'));
 }
 
 void testIsSpaceNotSpace()
 {
-	if (isspace('g'))
-		printf("FAIL\n");
+	assertFalse(isspace('g'));
+	assertFalse(isspace(' '));
 }
 
 int main()
 {
 	testIsSpace();
 	testIsSpaceNotSpace();
+
 	return 0;
 }
 
